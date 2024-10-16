@@ -12,7 +12,7 @@ const dummyMessages = [
 export default function ChatPage() {
     return (
         <main className="flex flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-            <div className="h-[87%] flex flex-col max-w-2xl gap-4 mx-auto">
+            <div className="h-[87%] max-md:h-[65%] flex flex-col max-w-2xl gap-4 mx-auto">
                 <div className="flex-1 overflow-auto">
                     {dummyMessages.map((message, index) => (
                         <ChatMessage key={index} isAi={message.isAi} content={message.content} />

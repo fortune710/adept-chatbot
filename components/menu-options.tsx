@@ -1,13 +1,9 @@
 import Link from "next/link"
 import {
-  Bell,
-  CircleUser,
   Home,
   LineChart,
-  Menu,
   Package,
   Package2,
-  Search,
   ShoppingCart,
   Users,
 } from "lucide-react"

@@ -5,7 +5,7 @@ export interface Opportunity {
   archivedate: Date;
   naicscode: string;
   typeofsetaside: string;
-  typeofsetasidedescription: string;
+  typeofsetasidedescription: string | null;
   noticeid: string;
   solicitationnumber: string;
   fullparentpathname: string;

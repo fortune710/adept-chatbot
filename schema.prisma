@@ -1,0 +1,33 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Opportunity {
+  title                       String @unique
+  description                 String
+  posteddate                  DateTime
+  archivedate                 DateTime
+  naicscode                   String
+  typeofsetaside              String
+  typeofsetasidedescription   String?
+  noticeid                    String
+  solicitationnumber          String?
+  fullparentpathname          String
+  fullparentpathcode          String?
+  type_op                     String?
+  archivetype                 String?
+  classificationcode          String?
+  pointofcontactname          String?
+  pointofcontactemail         String?
+  placeofperformancestate    String?
+  placeofperformancezip       String?
+  placeofperformancecountry   String?
+  ulink                       String
+
+  @@map("oppstable")
+}

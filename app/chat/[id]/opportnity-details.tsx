@@ -14,7 +14,7 @@ export default function OpportunityDetails({
       {details.map((detail) => (
         <li key={detail.name}>
           <p className="font-semibold text-base">{detail.name}</p>
-          <div className="grid grid-cols-[20px_auto] items-center gap-2">
+          <div className="grid grid-cols-[16px_auto] items-center gap-2">
             {detail.icon}
             <p className="text-sm flex-wrap">{detail.value}</p>
           </div>

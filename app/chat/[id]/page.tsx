@@ -89,12 +89,12 @@ function getOpportunityDetails(opportunity: Opportunity) {
     {
       name: "Title",
       value: opportunity.title,
-      icon: <Baseline className="w-5 h-5" />,
+      icon: <Baseline className="w-4 h-4" />,
     },
     {
       name: "Description",
       value: opportunity.description,
-      icon: <Link className="w-5 h-5" />,
+      icon: <Link className="w-4 h-4" />,
     },
     {
       name: "Posted Date",
@@ -109,42 +109,42 @@ function getOpportunityDetails(opportunity: Opportunity) {
     {
       name: "NAICS Code",
       value: opportunity.naicscode,
-      icon: <BookX className="w-5 h-5" />,
+      icon: <BookX className="w-4 h-4" />,
     },
     {
       name: "Notice ID",
       value: opportunity.naicscode,
-      icon: <IdCard className="w-5 h-5" />,
+      icon: <IdCard className="w-4 h-4" />,
     },
     {
       name: "Link",
       value: opportunity.ulink,
-      icon: <Link2 className="w-5 h-5" />,
+      icon: <Link2 className="w-4 h-4" />,
     },
     {
       name: "Point of Contact Name",
       value: opportunity.pointofcontactname,
-      icon: <User className="w-5 h-5" />,
+      icon: <User className="w-4 h-4" />,
     },
     {
       name: "Point of Contact Email",
       value: opportunity.pointofcontactemail,
-      icon: <Mail className="w-5 h-5" />,
+      icon: <Mail className="w-4 h-4" />,
     },
     {
       name: "Location",
       value: `${opportunity.placeofperformancestate}, ${opportunity.placeofperformancecountry}`,
-      icon: <MapPin className="w-5 h-5" />,
+      icon: <MapPin className="w-4 h-4" />,
     },
     {
       name: "Parent",
       value: opportunity.fullparentpathname,
-      icon: <FileBadge className="w-5 h-5" />,
+      icon: <FileBadge className="w-4 h-4" />,
     },
     {
       name: "Solicitation Number",
       value: opportunity.solicitationnumber,
-      icon: <Hash className="w-5 h-5" />,
+      icon: <Hash className="w-4 h-4" />,
     },
   ];
 }

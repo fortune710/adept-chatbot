@@ -37,7 +37,7 @@ export default async function ChatPage({
 }) {
   const opportunities = await getNonArchivedOpportunities();
   const selectedOpportunity = opportunities.find(
-    (opp) => opp.noticeid === params.id,
+    (opp: any) => opp.noticeid === params.id,
   ) as Opportunity;
 
   const details = getOpportunityDetails(selectedOpportunity);

@@ -9,7 +9,8 @@ datasource db {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Opportunity {
-  title                     String    @db.VarChar @unique
+  id                        String    @db.VarChar @unique
+  title                     String    @db.VarChar
   description               String?   @db.VarChar
   posteddate                DateTime? @db.Date
   archivedate               DateTime? @db.Date
@@ -17,7 +18,7 @@ model Opportunity {
   naicscodes                String?   @db.VarChar
   typeofsetaside            String?   @db.VarChar
   typeofsetasidedescription String?   @db.VarChar
-  noticeid                  String?   @db.VarChar @unique
+  noticeid                  String?   @db.VarChar
   solicitationnumber        String?   @db.VarChar
   fullparentpathname        String?   @db.VarChar
   fullparentpathcode        String?   @db.VarChar
@@ -35,8 +36,6 @@ model Opportunity {
   ulink                     String?   @db.VarChar
   ranking_process_flag      String?   @db.VarChar
 
-  rankings Rankings[]
-
   @@map("oppstable")
 }
 
@@ -44,17 +43,17 @@ model Opportunity {
 model ClientInfo {
   client_short_name String @db.VarChar
   client_raw_text   String
-  id                Int    @default(autoincrement()) @db.SmallInt @unique
+  id                Int    @unique @default(autoincrement()) @db.SmallInt
 
   @@map("oppclientinfo")
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Clients {
-  id              Int      @default(autoincrement()) @db.SmallInt @unique
-  clientshortname String?  @db.VarChar
-  clientlongname  String?  @db.VarChar
-  status          Boolean?
+  id                Int      @unique @default(autoincrement()) @db.SmallInt
+  client_short_name String?  @db.VarChar
+  client_long_name  String?  @db.VarChar
+  status            Boolean?
 
   @@map("oppclientlist")
 }
@@ -63,7 +62,7 @@ model Clients {
 model OpportunityTableInfo {
   opps_id       String @db.VarChar
   opps_raw_text String
-  id            Int    @default(autoincrement()) @db.SmallInt @unique
+  id            Int    @unique @default(autoincrement()) @db.SmallInt
 
   @@map("oppstableinfo")
 }
@@ -72,54 +71,50 @@ model OpportunityTableInfo {
 model OpportunityTempStore {
   record_identifier String  @db.VarChar
   raw_text          String
-  id                Int     @default(autoincrement()) @db.SmallInt @unique
+  id                Int     @unique @default(autoincrement()) @db.SmallInt
   record_type       String? @db.VarChar
 
   @@map("oppstempstore")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Rankings {
   opps_id           String   @db.VarChar
   client_short_name String?  @db.VarChar
   score             Decimal? @db.Decimal
-  id                Int      @default(autoincrement()) @db.SmallInt @unique
-
-  opportunity Opportunity @relation(fields: [opps_id], references: [noticeid])
+  id                Int      @unique(map: "oppsclientranking_id_idx") @default(autoincrement()) @db.SmallInt
 
   @@map("oppsclientranking")
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
- 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@map("sessions")
 }
- 
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -130,15 +125,15 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
- 
+
   @@map("users")
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
   @@map("verification_tokens")
 }

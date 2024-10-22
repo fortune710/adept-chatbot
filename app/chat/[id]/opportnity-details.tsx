@@ -10,7 +10,7 @@ export default function OpportunityDetails({
   details,
 }: OpportunityDetailsProps) {
   return (
-    <ul className="px-5 py-4 list-none space-y-3">
+    <ul className="px-5 py-4 list-none space-y-3 max-h-svh overflow-auto">
       {details.map((detail) => (
         <li key={detail.name}>
           <p className="font-semibold text-base">{detail.name}</p>

@@ -12,42 +12,23 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { Opportunity } from "@/lib/types";
-import { getNonArchivedOpportunities } from "@/server/opportinities";
-import {
-  Baseline,
-  BookX,
-  CalendarPlus,
-  CalendarX2,
-  FileBadge,
-  Hash,
-  IdCard,
-  Link,
-  Link2,
-  Mail,
-  MapPin,
-  User,
-} from "lucide-react";
-import OpportunityDetails from "./opportnity-details";
+import DetailsSlide from "./details-slide";
+import { Suspense } from "react";
 
 export default async function ChatPage({
   params,
 }: {
   params: { [x: string]: string };
 }) {
-  const opportunities = await getNonArchivedOpportunities();
-  const selectedOpportunity = opportunities.find(
-    (opp: any) => opp.noticeid === params.id,
-  ) as Opportunity;
-
-  const details = getOpportunityDetails(selectedOpportunity);
 
   return (
     <>
       <main className="max-md:hidden flex flex-col gap-4 lg:gap-6">
         <ResizablePanelGroup className="w-full" direction="horizontal">
           <ResizablePanel minSize={35} defaultSize={45} maxSize={45}>
-            <OpportunityDetails details={details} />
+            <Suspense>
+              <DetailsSlide noticeId={params.id} />
+            </Suspense>
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel
@@ -75,7 +56,9 @@ export default async function ChatPage({
             </DrawerHeader>
 
             <section>
-              <OpportunityDetails details={details} />
+              <Suspense>
+                <DetailsSlide noticeId={params.id} />
+              </Suspense>
             </section>
           </DrawerContent>
         </Drawer>
@@ -84,67 +67,3 @@ export default async function ChatPage({
   );
 }
 
-function getOpportunityDetails(opportunity: Opportunity) {
-  return [
-    {
-      name: "Title",
-      value: opportunity.title,
-      icon: <Baseline className="w-4 h-4" />,
-    },
-    {
-      name: "Description",
-      value: opportunity.description,
-      icon: <Link className="w-4 h-4" />,
-    },
-    {
-      name: "Posted Date",
-      value: opportunity.posteddate.toDateString(),
-      icon: <CalendarPlus className="w-4 h-4" />,
-    },
-    {
-      name: "Archive Date",
-      value: opportunity.archivedate.toDateString(),
-      icon: <CalendarX2 className="w-4 h-4" />,
-    },
-    {
-      name: "NAICS Code",
-      value: opportunity.naicscode,
-      icon: <BookX className="w-4 h-4" />,
-    },
-    {
-      name: "Notice ID",
-      value: opportunity.naicscode,
-      icon: <IdCard className="w-4 h-4" />,
-    },
-    {
-      name: "Link",
-      value: opportunity.ulink,
-      icon: <Link2 className="w-4 h-4" />,
-    },
-    {
-      name: "Point of Contact Name",
-      value: opportunity.pointofcontactname,
-      icon: <User className="w-4 h-4" />,
-    },
-    {
-      name: "Point of Contact Email",
-      value: opportunity.pointofcontactemail,
-      icon: <Mail className="w-4 h-4" />,
-    },
-    {
-      name: "Location",
-      value: `${opportunity.placeofperformancestate}, ${opportunity.placeofperformancecountry}`,
-      icon: <MapPin className="w-4 h-4" />,
-    },
-    {
-      name: "Parent",
-      value: opportunity.fullparentpathname,
-      icon: <FileBadge className="w-4 h-4" />,
-    },
-    {
-      name: "Solicitation Number",
-      value: opportunity.solicitationnumber,
-      icon: <Hash className="w-4 h-4" />,
-    },
-  ];
-}

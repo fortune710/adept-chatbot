@@ -4,6 +4,7 @@ export interface Opportunity {
   posteddate: Date;
   archivedate: Date;
   naicscode: string;
+  naicscodes: string;
   typeofsetaside: string;
   typeofsetasidedescription: string | null;
   noticeid: string;
@@ -15,8 +16,18 @@ export interface Opportunity {
   classificationcode: string;
   pointofcontactname: string;
   pointofcontactemail: string;
+  pointofcontactphone: string;
+  placeofperformancecity: string;
   placeofperformancestate: string;
   placeofperformancezip: string;
   placeofperformancecountry: string;
   ulink: string;
+  score: number;
+}
+
+export interface CreateUser {
+  name: string;
+  email: string;
+  client: string;
+  password: string;
 }

@@ -17,7 +17,8 @@ import Image from "next/image";
 import Opportunities from "./opportunities";
 import FilterDialog from "@/components/filter-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { auth } from "@/auth";
+import { Suspense } from "react";
+//import { auth } from "@/auth";
 //import { getOppsInfo } from "@/server/details";
 
 export default async function ChatLayout({
@@ -33,8 +34,6 @@ export default async function ChatLayout({
 
   //const details = await getOppsInfo();
   //writeFileSync("data.json", JSON.stringify(details))
-
-  const session = await auth();
 
 
   return (
@@ -62,7 +61,9 @@ export default async function ChatLayout({
               <h3 className="font-semibold text-lg mb-2">Opportunities</h3>
               <FilterDialog />
             </div>
-            <Opportunities />
+            <Suspense>
+              <Opportunities />
+            </Suspense>
           </div>
 
         </div>
@@ -105,9 +106,9 @@ export default async function ChatLayout({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar>
-                <AvatarFallback>{session?.user?.name?.at(0) || "A"}</AvatarFallback>
+                <AvatarFallback>{"A"}</AvatarFallback>
                 <AvatarImage
-                  src={session?.user?.image || undefined}
+                  src={undefined}
                 />
               </Avatar>
             </DropdownMenuTrigger>

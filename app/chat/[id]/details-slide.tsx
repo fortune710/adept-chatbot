@@ -13,26 +13,30 @@ import {
 } from "lucide-react";
 import OpportunityDetails from "./opportnity-details";
 import { Opportunity } from "@/lib/types";
-import { useStoredOpportunities } from "@/hooks/use-stored-opportunities";
+import { useOpportunities } from "@/hooks/use-opportunities";
+import { useSearchParams } from "next/navigation";
   
 export default function DetailsSlide({ noticeId }: { noticeId: string }) {
+  const searchParams = useSearchParams();
+  const naics = searchParams.get('naics_code') || null;
+  const agency = searchParams.get('agency') || null;
 
 
-    const { opportunities, isLoading } = useStoredOpportunities();
-    const selectedOpportunity = opportunities?.find(
-        (opp: any) => opp.noticeid === noticeId,
-    ) as Opportunity;
+  const { data: opportunities, isLoading } = useOpportunities(naics, agency);
+  const selectedOpportunity = opportunities?.find(
+      (opp: any) => opp.noticeid === noticeId,
+  ) as Opportunity;
 
-    const details = getOpportunityDetails(selectedOpportunity);
+  const details = getOpportunityDetails(selectedOpportunity);
 
-    if (isLoading) {
-        return <h2>Loading...</h2>
-    }
+  if (isLoading) {
+      return <h2>Loading...</h2>
+  }
 
-    
-    return (
-        <OpportunityDetails details={details} />
-    )
+  
+  return (
+      <OpportunityDetails details={details} />
+  )
 }
 
 

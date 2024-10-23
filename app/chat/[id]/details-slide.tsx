@@ -68,6 +68,7 @@ function getOpportunityDetails(opportunity: Opportunity) {
         name: "Link",
         value: opportunity?.ulink,
         icon: <Link2 className="w-4 h-4" />,
+        isLink: true
       },
       {
         name: "Organization Code",

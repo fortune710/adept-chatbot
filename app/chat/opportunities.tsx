@@ -1,12 +1,16 @@
 "use client"
 import OpportunitiesList from "@/components/opportunities-list";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useStoredOpportunities } from "@/hooks/use-stored-opportunities";
+import { useOpportunities } from "@/hooks/use-opportunities";
+import { useSearchParams } from "next/navigation";
 //import { useSession } from "next-auth/react"
 
 export default function Opportunities() {
     //const { data: session } = useSession();
-    const { opportunities, isLoading } = useStoredOpportunities();
+    const searchParams = useSearchParams();
+    const naics = searchParams.get('naics_code') || null;
+    const agency = searchParams.get('agency') || null;
+    const { data: opportunities, isLoading } = useOpportunities(naics, agency);
     
     
     if (isLoading) {

@@ -18,7 +18,7 @@ export async function getNonArchivedOpportunities(
       WHERE o.archivedate > CURRENT_DATE
       AND o.naicsCode LIKE ${"%" + (naicsCode || "") + "%"}
       AND o.fullparentpathname LIKE ${"%" + (agency || "") + "%"}
-      LIMIT 10
+      LIMIT 200
     `;
 
     

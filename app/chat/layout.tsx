@@ -18,6 +18,7 @@ import Opportunities from "./opportunities";
 import FilterDialog from "@/components/filter-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { auth } from "@/auth";
+//import { getOppsInfo } from "@/server/details";
 
 export default async function ChatLayout({
   children,
@@ -29,6 +30,9 @@ export default async function ChatLayout({
 }) {
   //const headersList = headers()
   //const fullUrl = headersList.get('referer') || ''
+
+  //const details = await getOppsInfo();
+  //writeFileSync("data.json", JSON.stringify(details))
 
   const session = await auth();
 

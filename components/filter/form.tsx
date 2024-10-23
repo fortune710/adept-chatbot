@@ -5,10 +5,9 @@ import { Label } from "@/components/ui/label"
 import { DialogClose, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { useQueryState } from 'nuqs';
-import { useOpportunities } from "@/hooks/use-opportunities"
+//import { useOpportunities } from "@/hooks/use-opportunities"
 import { cn } from "@/lib/utils"
-import { useStoredOpportunities } from "@/hooks/use-stored-opportunities"
-import { PlusCircle } from "lucide-react"
+//import { useStoredOpportunities } from "@/hooks/use-stored-opportunities"
 
 interface FilterFormProps {
     agencies: string[]
@@ -17,9 +16,9 @@ interface FilterFormProps {
 export default function FilterForm({ agencies }: FilterFormProps) {
     const [naicsCode, setNaicsCode] = useQueryState('naics_code');
     const [agency, setAgency] = useQueryState('agency');
-    const { storeOpportunity, isStored } = useStoredOpportunities();
+    //const { storeOpportunity, isStored } = useStoredOpportunities();
 
-    const { data: opportunities, isLoading } = useOpportunities(naicsCode, agency)
+    //const { data: opportunities, isLoading } = useOpportunities(naicsCode, agency)
 
     const applyFilter = (formData: FormData) => {
         setNaicsCode(formData.get("naics")?.toString() || null);
@@ -33,7 +32,7 @@ export default function FilterForm({ agencies }: FilterFormProps) {
 
     return (
     <form action={applyFilter}>
-        <div className={cn("grid gap-4 py-4", (agency || naicsCode) && "grid-cols-2")}>
+        <div className={cn("grid gap-4 py-4", /*(agency || naicsCode) && "grid-cols-2"*/)}>
             <div className="grid gap-2">
                 <Label htmlFor="naics">
                     NAICS code
@@ -67,6 +66,7 @@ export default function FilterForm({ agencies }: FilterFormProps) {
             </div>
         </div>
         {
+            /*
             (agency || naicsCode) &&
             <ul className="max-h-[300px] mb-3 px-3 overflow-y-auto">
                 {
@@ -87,6 +87,7 @@ export default function FilterForm({ agencies }: FilterFormProps) {
                     ))
                 }
             </ul>
+            */
         }
         <DialogFooter>
             <DialogClose onClick={clearFilters} asChild>

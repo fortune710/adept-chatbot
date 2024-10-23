@@ -21,7 +21,7 @@ export default function OpportunityDetails({
             {detail.icon}
             {
               !detail.isLink ? <p className="text-sm flex-wrap">{detail.value}</p> :
-              <Link className="text-sm flex-wrap hover:text-card-foreground" target="_blank" href={detail.value}>
+              <Link className="text-sm flex-wrap hover:text-card-foreground" target="_blank" href={detail.value ?? ''}>
                 {detail.value}
               </Link>
             }

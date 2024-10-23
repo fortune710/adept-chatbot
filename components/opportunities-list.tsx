@@ -13,11 +13,10 @@ export default function OpportunitiesList({
 
   return (
     <>
-      {opportunities?.map((opportunity) => (
-        <Tooltip key={opportunity.title}>
+      {opportunities?.map((opportunity, index) => (
+        <Tooltip key={opportunity.title + index}>
           <TooltipTrigger asChild>
             <Link
-              key={opportunity.title}
               href={`/chat/${opportunity.noticeid}`}
               className={cn("mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:bg-accent hover:text-foreground", opportunity.type_op === "Justification" && "text-blue-900/80")}
             >

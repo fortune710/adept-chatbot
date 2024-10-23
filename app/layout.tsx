@@ -23,16 +23,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Providers>
-        <TooltipProvider>
-          <body
-            className={`${inter.className} antialiased`}
-          >
-            {children}
-          </body>
-          <Toaster/>
-        </TooltipProvider>
-      </Providers>
+        <body
+          className={`${inter.className} antialiased`}
+        >
+          <TooltipProvider>
+            <Providers>
+              {children}
+            </Providers>
+            <Toaster/>
+          </TooltipProvider>
+        </body>
     </html>
   );
 }
